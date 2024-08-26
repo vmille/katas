@@ -17,7 +17,7 @@ namespace vm {
   }
 }
 // This is a normal unit test using Catch2
-TEST_CASE("UpdateQuality") {
+TEST_CASE("update_quality") {
   std::vector<vm::item> items;
   items.push_back(vm::item("foo", 0, 0));
   vm::gilded_rose app(items);
@@ -26,7 +26,7 @@ TEST_CASE("UpdateQuality") {
 }
 
 // This is an Approval test using https://github.com/approvals/approvaltests.cpp
-TEST_CASE("UpdateQualityApprovalTest") {
+TEST_CASE("update_quality_approval_test") {
   std::vector<vm::item> items;
   items.push_back(vm::item("foo", 0, 0));
   vm::gilded_rose app(items);
@@ -35,7 +35,7 @@ TEST_CASE("UpdateQualityApprovalTest") {
   ApprovalTests::Approvals::verify(item);
 }
 
-TEST_CASE("GildedRoseApprovalTests", "VerifyCombinations")
+TEST_CASE("gilded_rose_approval_tests", "VerifyCombinations")
 {
   std::vector<std::string> names{"Foo"};
   std::vector<int> sellIns{1};
