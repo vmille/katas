@@ -56,9 +56,9 @@ TEST_CASE("gilded_rose_approval_tests", "VerifyCombinations")
 
 TEST_CASE("Sulfuras", "[harness][item test]") {
   std::vector<vm::item> items;
-  items.push_back(vm::item("Sulfuras, Hand of Ragnaros", 1, 80));
+  items.push_back(vm::item(vm::sulfuras, 1, 80));
   vm::gilded_rose app(items);
-  REQUIRE("Sulfuras, Hand of Ragnaros" == app.items[0].name);
+  REQUIRE(vm::sulfuras == app.items[0].name);
   REQUIRE(80 == app.items[0].quality);
   app.update_quality();
   REQUIRE(80 == app.items[0].quality);
@@ -106,9 +106,9 @@ TEST_CASE("Quality never negative", "[harness][item test]") {
 
 TEST_CASE("After sold date, Aged Brie gets better quality", "[harness][item test][Aged Brie]") {
   std::vector<vm::item> items;
-  items.push_back(vm::item("Aged Brie", 2, 1));
+  items.push_back(vm::item(vm::aged_brie, 2, 1));
   vm::gilded_rose app(items);
-  REQUIRE("Aged Brie" == app.items[0].name);
+  REQUIRE(vm::aged_brie == app.items[0].name);
   REQUIRE(1 == app.items[0].quality);
   app.update_quality();
   REQUIRE(2 == app.items[0].quality);
@@ -118,9 +118,9 @@ TEST_CASE("After sold date, Aged Brie gets better quality", "[harness][item test
 
 TEST_CASE("Backstage passes get specific quality rules", "[harness][item test][Backstage passes]") {
   std::vector<vm::item> items;
-  items.push_back(vm::item("Backstage passes to a TAFKAL80ETC concert", 12, 1));
+  items.push_back(vm::item(vm::backstage_passes, 12, 1));
   vm::gilded_rose app(items);
-  REQUIRE("Backstage passes to a TAFKAL80ETC concert" == app.items[0].name);
+  REQUIRE(vm::backstage_passes == app.items[0].name);
   REQUIRE(1 == app.items[0].quality);
   app.update_quality();
   REQUIRE(2 == app.items[0].quality);
