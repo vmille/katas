@@ -90,3 +90,15 @@ TEST_CASE("Quality decrease by 2 after sold date", "[harness][item test]") {
   app.update_quality();
   REQUIRE(25 == app.items[0].quality);
 }
+
+TEST_CASE("Quality never negative", "[harness][item test]") {
+  std::vector<vm::item> items;
+  items.push_back(vm::item("Foo", 1, 1));
+  vm::gilded_rose app(items);
+  REQUIRE("Foo" == app.items[0].name);
+  REQUIRE(1 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(0 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(0 == app.items[0].quality);
+}
