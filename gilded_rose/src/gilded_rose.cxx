@@ -13,6 +13,17 @@ namespace vm {
       if (item.name == sulfuras) {
         continue;
       }
+      if (item.name == aged_brie) {
+        if (item.quality < 50) {
+          item.quality = item.quality + 1;
+        }
+        if (item.sell_in < 0) {
+          if (item.quality < 50) {
+            item.quality = item.quality + 1;
+          }
+        }
+        continue;
+      }
       if (item.name != aged_brie && item.name != backstage_passes) {
         if (item.quality > 0 && item.name != sulfuras) {
           item.quality = item.quality - 1;
