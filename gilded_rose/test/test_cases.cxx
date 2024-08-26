@@ -52,3 +52,15 @@ TEST_CASE("gilded_rose_approval_tests", "VerifyCombinations")
       f,
       names, sellIns, qualities);
 }
+
+TEST_CASE("Sulfuras", "[harness][item test]") {
+  std::vector<vm::item> items;
+  items.push_back(vm::item("Sulfuras, Hand of Ragnaros", 1, 80));
+  vm::gilded_rose app(items);
+  REQUIRE("Sulfuras, Hand of Ragnaros" == app.items[0].name);
+  REQUIRE(80 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(80 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(80 == app.items[0].quality);
+}
