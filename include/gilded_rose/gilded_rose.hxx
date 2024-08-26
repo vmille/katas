@@ -11,9 +11,9 @@
 namespace vm {
     struct item {
         std::string name;
-        int sellIn;
+        int sell_in;
         int quality;
-        item(std::string _name, int _sellIn, int _quality) : name(std::move(_name)), sellIn(_sellIn), quality(_quality) {}
+        item(std::string _name, int _sell_in, int _quality) : name(std::move(_name)), sell_in(_sell_in), quality(_quality) {}
     };
 
     struct gilded_rose {

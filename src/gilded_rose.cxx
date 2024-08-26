@@ -31,7 +31,7 @@ namespace vm {
 
                     if (items[i].name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        if (items[i].sellIn < 11)
+                        if (items[i].sell_in < 11)
                         {
                             if (items[i].quality < 50)
                             {
@@ -39,7 +39,7 @@ namespace vm {
                             }
                         }
 
-                        if (items[i].sellIn < 6)
+                        if (items[i].sell_in < 6)
                         {
                             if (items[i].quality < 50)
                             {
@@ -52,10 +52,10 @@ namespace vm {
 
             if (items[i].name != "Sulfuras, Hand of Ragnaros")
             {
-                items[i].sellIn = items[i].sellIn - 1;
+                items[i].sell_in = items[i].sell_in - 1;
             }
 
-            if (items[i].sellIn < 0)
+            if (items[i].sell_in < 0)
             {
                 if (items[i].name != "Aged Brie")
                 {

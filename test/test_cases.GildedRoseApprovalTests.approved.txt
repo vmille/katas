@@ -1,2 +1,2 @@
-(Foo, 1, 1) => name: Foo, sellIn: 0, quality: 0
+(Foo, 1, 1) => name: Foo, sell_in: 0, quality: 0
 
