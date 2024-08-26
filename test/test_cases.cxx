@@ -12,7 +12,7 @@ namespace vm {
   std::ostream& operator<< (std::ostream& os, vm::item const& obj) {
     return os
         << "name: " << obj.name
-        << ", sellIn: " << obj.sell_in
+        << ", sell_in: " << obj.sell_in
         << ", quality: " << obj.quality;
   }
 }
