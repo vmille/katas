@@ -19,11 +19,10 @@ namespace vm {
         if (items[i].quality < 50) {
           items[i].quality = items[i].quality + 1;
           if (items[i].name == backstage_passes) {
-            if (items[i].sell_in < 11 && items[i].quality < 50) {
+            if (items[i].sell_in < 11) {
               items[i].quality = items[i].quality + 1;
             }
-
-            if (items[i].sell_in < 6 && items[i].quality < 50) {
+            if (items[i].sell_in < 6) {
               items[i].quality = items[i].quality + 1;
             }
           }
