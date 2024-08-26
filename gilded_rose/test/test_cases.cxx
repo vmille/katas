@@ -1,7 +1,8 @@
 //
 // Created by Vivien Mille on 25/08/2024.
 //
-#include <catch2/catch_test_macros.hpp>
+#define APPROVALS_CATCH
+#include <catch2/catch_all.hpp>
 #include <ApprovalTests/ApprovalTests.hpp>
 
 #include "gilded_rose/gilded_rose.hxx"
