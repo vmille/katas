@@ -114,3 +114,31 @@ TEST_CASE("After sold date, Aged Brie gets better quality", "[harness][item test
   app.update_quality();
   REQUIRE(3 == app.items[0].quality);
 }
+
+TEST_CASE("Backstage passes get specific quality rules", "[harness][item test][Backstage passes]") {
+  std::vector<vm::item> items;
+  items.push_back(vm::item("Backstage passes to a TAFKAL80ETC concert", 12, 1));
+  vm::gilded_rose app(items);
+  REQUIRE("Backstage passes to a TAFKAL80ETC concert" == app.items[0].name);
+  REQUIRE(1 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(2 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(3 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(5 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(7 == app.items[0].quality);
+  app.update_quality();
+  app.update_quality();
+  app.update_quality();
+  app.update_quality();
+  REQUIRE(16 == app.items[0].quality);
+  app.update_quality();
+  app.update_quality();
+  app.update_quality();
+  app.update_quality();
+  REQUIRE(28 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(0 == app.items[0].quality);
+}
