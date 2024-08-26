@@ -10,6 +10,9 @@ namespace vm {
 
   void gilded_rose::update_quality () {
     for (int i = 0; i < items.size(); i++) {
+      if (items[i].name == sulfuras) {
+        continue;
+      }
       if (items[i].name != aged_brie && items[i].name != backstage_passes) {
         if (items[i].quality > 0 && items[i].name != sulfuras) {
           items[i].quality = items[i].quality - 1;
@@ -29,9 +32,7 @@ namespace vm {
         }
       }
 
-      if (items[i].name != sulfuras) {
-        items[i].sell_in = items[i].sell_in - 1;
-      }
+      items[i].sell_in = items[i].sell_in - 1;
 
       if (items[i].sell_in < 0) {
         if (items[i].name != aged_brie) {
