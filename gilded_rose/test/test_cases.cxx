@@ -64,3 +64,16 @@ TEST_CASE("Sulfuras", "[harness][item test]") {
   app.update_quality();
   REQUIRE(80 == app.items[0].quality);
 }
+
+TEST_CASE("Quality decrease by 1 before sold date", "[harness][item test]") {
+  std::vector<vm::item> items;
+  items.push_back(vm::item("Foo", 10, 30));
+  vm::gilded_rose app(items);
+  REQUIRE("Foo" == app.items[0].name);
+  REQUIRE(30 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(29 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(28 == app.items[0].quality);
+}
+
