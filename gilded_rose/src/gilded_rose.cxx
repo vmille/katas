@@ -11,40 +11,37 @@ namespace vm {
   void gilded_rose::update_quality () {
     for (auto& item: items) {
       if (item.name == sulfuras) {
+        --item.sell_in;
         continue;
       }
       else if (item.name == aged_brie) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
+        ++item.quality;
         if (item.sell_in < 0) {
-          if (item.quality < 50) {
-            item.quality = item.quality + 1;
-          }
+          ++item.quality;
         }
+        item.quality = std::min(item.quality, 50);
         continue;
       }
       else if (item.name == backstage_passes) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-          if (item.sell_in < 11) {
-            item.quality = item.quality + 1;
-          }
-          if (item.sell_in < 6) {
-            item.quality = item.quality + 1;
-          }
+        ++item.quality;
+        if (item.sell_in < 11) {
+          ++item.quality;
         }
-        item.sell_in = item.sell_in - 1;
+        if (item.sell_in < 6) {
+          ++item.quality;
+        }
+        --item.sell_in;
         if (item.sell_in < 0) {
           item.quality = 0;
         }
+        item.quality = std::min(item.quality, 50);
         continue;
       }
       else {
         if (item.quality > 0) {
           item.quality = item.quality - 1;
         }
-        item.sell_in = item.sell_in - 1;
+        --item.sell_in;
         if (item.sell_in < 0 && item.quality > 0) {
           item.quality = item.quality - 1;
         }
