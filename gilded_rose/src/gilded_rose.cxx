@@ -16,6 +16,10 @@ namespace vm {
     _item.quality -= fold;
   }
 
+  constexpr void clamp_quality (item& _item) {
+    _item.quality = std::clamp(_item.quality, 0, 50);
+  }
+
   constexpr void update_sulfuras (item& _item) {
     --_item.sell_in;
   }
@@ -26,7 +30,7 @@ namespace vm {
     if (_item.sell_in < 0) {
       increase_quality(_item);
     }
-    _item.quality = std::min(_item.quality, 50);
+    clamp_quality(_item);
   }
 
   constexpr void update_baskstage_passes (item& _item) {
@@ -41,7 +45,7 @@ namespace vm {
     if (_item.sell_in < 0) {
       _item.quality = 0;
     }
-    _item.quality = std::min(_item.quality, 50);
+    clamp_quality(_item);
   }
 
   constexpr void update_default (item& _item) {
@@ -50,7 +54,7 @@ namespace vm {
     if (_item.sell_in < 0) {
       decrease_quality(_item);
     }
-    _item.quality = std::max(0, _item.quality);
+    clamp_quality(_item);
   }
 
   static std::unordered_map<std::string_view, std::function<void (item&)>> rules{
