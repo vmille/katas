@@ -8,43 +8,59 @@ namespace vm {
 
   gilded_rose::gilded_rose (std::vector<item>& items) : items(items) {}
 
+  constexpr void update_sulfuras(item& _item) {
+    --_item.sell_in;
+  }
+
+  constexpr void update_aged_brie(item& _item) {
+    ++_item.quality;
+    if (_item.sell_in < 0) {
+      ++_item.quality;
+    }
+    _item.quality = std::min(_item.quality, 50);
+  }
+
+  constexpr void update_baskstage_passes(item& _item) {
+    ++_item.quality;
+    if (_item.sell_in < 11) {
+      ++_item.quality;
+    }
+    if (_item.sell_in < 6) {
+      ++_item.quality;
+    }
+    --_item.sell_in;
+    if (_item.sell_in < 0) {
+      _item.quality = 0;
+    }
+    _item.quality = std::min(_item.quality, 50);
+  }
+
+  constexpr void update_default(item& _item) {
+    if (_item.quality > 0) {
+      _item.quality = _item.quality - 1;
+    }
+    --_item.sell_in;
+    if (_item.sell_in < 0 && _item.quality > 0) {
+      _item.quality = _item.quality - 1;
+    }
+  }
+
   void gilded_rose::update_quality () {
-    for (auto& item: items) {
-      if (item.name == sulfuras) {
-        --item.sell_in;
+    for (auto& _item: items) {
+      if (_item.name == sulfuras) {
+        update_sulfuras(_item);
         continue;
       }
-      else if (item.name == aged_brie) {
-        ++item.quality;
-        if (item.sell_in < 0) {
-          ++item.quality;
-        }
-        item.quality = std::min(item.quality, 50);
+      else if (_item.name == aged_brie) {
+        update_aged_brie(_item);
         continue;
       }
-      else if (item.name == backstage_passes) {
-        ++item.quality;
-        if (item.sell_in < 11) {
-          ++item.quality;
-        }
-        if (item.sell_in < 6) {
-          ++item.quality;
-        }
-        --item.sell_in;
-        if (item.sell_in < 0) {
-          item.quality = 0;
-        }
-        item.quality = std::min(item.quality, 50);
+      else if (_item.name == backstage_passes) {
+        update_baskstage_passes(_item);
         continue;
       }
       else {
-        if (item.quality > 0) {
-          item.quality = item.quality - 1;
-        }
-        --item.sell_in;
-        if (item.sell_in < 0 && item.quality > 0) {
-          item.quality = item.quality - 1;
-        }
+        update_default(_item);
       }
     }
   }
