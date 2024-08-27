@@ -8,27 +8,36 @@ namespace vm {
 
   gilded_rose::gilded_rose (std::vector<item>& items) : items(items) {}
 
+  constexpr void increase_quality (item& _item, int fold = 1) {
+    _item.quality += fold;
+  }
+
+  constexpr void decrease_quality (item& _item, int fold = 1) {
+    _item.quality -= fold;
+  }
+
   constexpr void update_sulfuras (item& _item) {
     --_item.sell_in;
   }
 
   constexpr void update_aged_brie (item& _item) {
-    ++_item.quality;
+    increase_quality(_item);
+    --_item.sell_in;
     if (_item.sell_in < 0) {
-      ++_item.quality;
+      increase_quality(_item);
     }
     _item.quality = std::min(_item.quality, 50);
   }
 
   constexpr void update_baskstage_passes (item& _item) {
-    ++_item.quality;
-    if (_item.sell_in < 11) {
-      ++_item.quality;
-    }
-    if (_item.sell_in < 6) {
-      ++_item.quality;
-    }
+    increase_quality(_item);
     --_item.sell_in;
+    if (_item.sell_in < 10) {
+      increase_quality(_item);
+    }
+    if (_item.sell_in < 5) {
+      increase_quality(_item);
+    }
     if (_item.sell_in < 0) {
       _item.quality = 0;
     }
@@ -37,9 +46,9 @@ namespace vm {
 
   constexpr void update_default (item& _item) {
     --_item.sell_in;
-    --_item.quality;
+    decrease_quality(_item);
     if (_item.sell_in < 0) {
-      --_item.quality;
+      decrease_quality(_item);
     }
     _item.quality = std::max(0, _item.quality);
   }
