@@ -16,6 +16,10 @@ namespace vm {
     _item.quality -= fold;
   }
 
+  constexpr void cancel_quality (item& _item) {
+    _item.quality = 0;
+  }
+
   constexpr void clamp_quality (item& _item) {
     _item.quality = std::clamp(_item.quality, 0, 50);
   }
@@ -24,9 +28,12 @@ namespace vm {
     --_item.sell_in;
   }
 
+  constexpr void add_day (item& _item) {
+    --_item.sell_in;
+  }
+
   constexpr void update_aged_brie (item& _item) {
     increase_quality(_item);
-    --_item.sell_in;
     if (_item.sell_in < 0) {
       increase_quality(_item);
     }
@@ -35,7 +42,6 @@ namespace vm {
 
   constexpr void update_baskstage_passes (item& _item) {
     increase_quality(_item);
-    --_item.sell_in;
     if (_item.sell_in < 10) {
       increase_quality(_item);
     }
@@ -43,13 +49,12 @@ namespace vm {
       increase_quality(_item);
     }
     if (_item.sell_in < 0) {
-      _item.quality = 0;
+      cancel_quality(_item);
     }
     clamp_quality(_item);
   }
 
   constexpr void update_default (item& _item) {
-    --_item.sell_in;
     decrease_quality(_item);
     if (_item.sell_in < 0) {
       decrease_quality(_item);
@@ -75,6 +80,7 @@ namespace vm {
 
   void gilded_rose::update_quality () {
     for (auto& _item: items) {
+      add_day(_item);
       update_product(_item);
     }
   }
