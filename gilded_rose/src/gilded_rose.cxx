@@ -36,13 +36,12 @@ namespace vm {
   }
 
   constexpr void update_default (item& _item) {
-    if (_item.quality > 0) {
-      _item.quality = _item.quality - 1;
-    }
     --_item.sell_in;
-    if (_item.sell_in < 0 && _item.quality > 0) {
+      _item.quality = _item.quality - 1;
+    if (_item.sell_in < 0) {
       _item.quality = _item.quality - 1;
     }
+    _item.quality = std::max(0, _item.quality);
   }
 
   static std::unordered_map<std::string_view, std::function<void (item&)>> rules{
