@@ -45,23 +45,25 @@ namespace vm {
     }
   }
 
+  static std::unordered_map<std::string_view, std::function<void(item&)>> rules{
+    {aged_brie, update_aged_brie},
+    {sulfuras, &update_sulfuras},
+    {backstage_passes, &update_baskstage_passes}
+  };
+
+  void update_product (item& _item) {
+    auto const iter = rules.find(_item.name);
+    if (iter != std::end(rules)) {
+      iter->second(_item);
+    }
+    else {
+      update_default(_item);
+    }
+  }
+
   void gilded_rose::update_quality () {
     for (auto& _item: items) {
-      if (_item.name == sulfuras) {
-        update_sulfuras(_item);
-        continue;
-      }
-      else if (_item.name == aged_brie) {
-        update_aged_brie(_item);
-        continue;
-      }
-      else if (_item.name == backstage_passes) {
-        update_baskstage_passes(_item);
-        continue;
-      }
-      else {
-        update_default(_item);
-      }
+      update_product(_item);
     }
   }
 } // vm
