@@ -24,10 +24,6 @@ namespace vm {
     _item.quality = std::clamp(_item.quality, 0, 50);
   }
 
-  constexpr void update_sulfuras (item& _item) {
-    --_item.sell_in;
-  }
-
   constexpr void add_day (item& _item) {
     --_item.sell_in;
   }
@@ -40,11 +36,11 @@ namespace vm {
     return _item.sell_in < days;
   }
 
+  constexpr void update_sulfuras (item&) {
+  }
+
   constexpr void update_aged_brie (item& _item) {
-    increase_quality(_item);
-    if (is_expired(_item)) {
-      increase_quality(_item);
-    }
+    increase_quality(_item, is_expired(_item) ? 2 : 1);
     clamp_quality(_item);
   }
 
@@ -63,10 +59,7 @@ namespace vm {
   }
 
   constexpr void update_default (item& _item) {
-    decrease_quality(_item);
-    if (is_expired(_item)) {
-      decrease_quality(_item);
-    }
+    decrease_quality(_item, is_expired(_item) ? 2 : 1);
     clamp_quality(_item);
   }
 
