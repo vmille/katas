@@ -58,14 +58,14 @@ namespace vm {
     clamp_quality(_item);
   }
 
-  constexpr void update_conjured (item& _item) {
-    decrease_quality(_item, is_expired(_item) ? 4 : 2);
-    clamp_quality(_item);
-  }
-
   constexpr void update_default (item& _item) {
     decrease_quality(_item, is_expired(_item) ? 2 : 1);
     clamp_quality(_item);
+  }
+
+  constexpr void update_conjured (item& _item) {
+    update_default(_item);
+    update_default(_item);
   }
 
   static std::unordered_map<std::string_view, std::function<void (item&)>> rules{
