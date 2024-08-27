@@ -21,6 +21,7 @@ namespace vm {
   static constexpr auto aged_brie = "Aged Brie";
   static constexpr auto backstage_passes = "Backstage passes to a TAFKAL80ETC concert";
   static constexpr auto sulfuras = "Sulfuras, Hand of Ragnaros";
+  static constexpr auto conjured = "Conjured";
 
   struct gilded_rose {
     std::vector<item>& items;

@@ -156,3 +156,16 @@ TEST_CASE("Backstage passes get specific quality rules", "[harness][item test][B
   app.update_quality();
   REQUIRE(0 == app.items[0].quality);
 }
+
+TEST_CASE("Conjured", "[item test][conjured]") {
+  std::vector<vm::item> items;
+  items.push_back(vm::item(vm::conjured, 2, 10));
+  vm::gilded_rose app(items);
+  REQUIRE(10 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(8 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(6 == app.items[0].quality);
+  app.update_quality();
+  REQUIRE(2 == app.items[0].quality);
+}
