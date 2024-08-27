@@ -8,11 +8,11 @@ namespace vm {
 
   gilded_rose::gilded_rose (std::vector<item>& items) : items(items) {}
 
-  constexpr void update_sulfuras(item& _item) {
+  constexpr void update_sulfuras (item& _item) {
     --_item.sell_in;
   }
 
-  constexpr void update_aged_brie(item& _item) {
+  constexpr void update_aged_brie (item& _item) {
     ++_item.quality;
     if (_item.sell_in < 0) {
       ++_item.quality;
@@ -20,7 +20,7 @@ namespace vm {
     _item.quality = std::min(_item.quality, 50);
   }
 
-  constexpr void update_baskstage_passes(item& _item) {
+  constexpr void update_baskstage_passes (item& _item) {
     ++_item.quality;
     if (_item.sell_in < 11) {
       ++_item.quality;
@@ -35,7 +35,7 @@ namespace vm {
     _item.quality = std::min(_item.quality, 50);
   }
 
-  constexpr void update_default(item& _item) {
+  constexpr void update_default (item& _item) {
     if (_item.quality > 0) {
       _item.quality = _item.quality - 1;
     }
