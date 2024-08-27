@@ -36,6 +36,10 @@ namespace vm {
     return _item.sell_in < 0;
   }
 
+  constexpr bool expires_in (item& _item, int days) {
+    return _item.sell_in < days;
+  }
+
   constexpr void update_aged_brie (item& _item) {
     increase_quality(_item);
     if (is_expired(_item)) {
@@ -46,10 +50,10 @@ namespace vm {
 
   constexpr void update_baskstage_passes (item& _item) {
     increase_quality(_item);
-    if (_item.sell_in < 10) {
+    if (expires_in(_item, 10)) {
       increase_quality(_item);
     }
-    if (_item.sell_in < 5) {
+    if (expires_in(_item, 5)) {
       increase_quality(_item);
     }
     if (is_expired(_item)) {
