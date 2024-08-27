@@ -32,9 +32,13 @@ namespace vm {
     --_item.sell_in;
   }
 
+  constexpr bool is_expired (item& _item) {
+    return _item.sell_in < 0;
+  }
+
   constexpr void update_aged_brie (item& _item) {
     increase_quality(_item);
-    if (_item.sell_in < 0) {
+    if (is_expired(_item)) {
       increase_quality(_item);
     }
     clamp_quality(_item);
@@ -48,7 +52,7 @@ namespace vm {
     if (_item.sell_in < 5) {
       increase_quality(_item);
     }
-    if (_item.sell_in < 0) {
+    if (is_expired(_item)) {
       cancel_quality(_item);
     }
     clamp_quality(_item);
@@ -56,7 +60,7 @@ namespace vm {
 
   constexpr void update_default (item& _item) {
     decrease_quality(_item);
-    if (_item.sell_in < 0) {
+    if (is_expired(_item)) {
       decrease_quality(_item);
     }
     clamp_quality(_item);
