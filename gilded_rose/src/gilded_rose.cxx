@@ -37,9 +37,9 @@ namespace vm {
 
   constexpr void update_default (item& _item) {
     --_item.sell_in;
-    _item.quality = _item.quality - 1;
+    --_item.quality;
     if (_item.sell_in < 0) {
-      _item.quality = _item.quality - 1;
+      --_item.quality;
     }
     _item.quality = std::max(0, _item.quality);
   }
