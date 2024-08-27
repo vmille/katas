@@ -69,7 +69,7 @@ namespace vm {
   }
 
   static std::unordered_map<std::string_view, std::function<void (item&)>> rules{
-      {aged_brie, update_aged_brie},
+      {aged_brie, &update_aged_brie},
       {sulfuras,  &update_sulfuras},
       {backstage_passes, &update_backstage_passes},
       {conjured,         &update_conjured}
