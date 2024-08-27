@@ -37,7 +37,7 @@ namespace vm {
 
   constexpr void update_default (item& _item) {
     --_item.sell_in;
-      _item.quality = _item.quality - 1;
+    _item.quality = _item.quality - 1;
     if (_item.sell_in < 0) {
       _item.quality = _item.quality - 1;
     }
@@ -46,7 +46,7 @@ namespace vm {
 
   static std::unordered_map<std::string_view, std::function<void (item&)>> rules{
       {aged_brie, update_aged_brie},
-      {sulfuras, &update_sulfuras},
+      {sulfuras,  &update_sulfuras},
       {backstage_passes, &update_baskstage_passes}
   };
 
