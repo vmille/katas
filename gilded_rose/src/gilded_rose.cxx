@@ -48,7 +48,7 @@ namespace vm {
     clamp_quality(_item);
   }
 
-  constexpr void update_baskstage_passes (item& _item) {
+  constexpr void update_backstage_passes (item& _item) {
     increase_quality(_item);
     if (expires_in(_item, 10)) {
       increase_quality(_item);
@@ -73,7 +73,7 @@ namespace vm {
   static std::unordered_map<std::string_view, std::function<void (item&)>> rules{
       {aged_brie, update_aged_brie},
       {sulfuras,  &update_sulfuras},
-      {backstage_passes, &update_baskstage_passes}
+      {backstage_passes, &update_backstage_passes}
   };
 
   void update_product (item& _item) {
